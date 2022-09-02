@@ -16,6 +16,7 @@ class BottomBarFancyPage extends StatelessWidget {
 
 RxInt buttonPressed = 0.obs;
 RxInt lastButtonPressed = 0.obs;
+//RxBool isPlaying = false.obs;
 
 class BottomBarFancy extends StatefulWidget {
   const BottomBarFancy({Key? key}) : super(key: key);
@@ -35,7 +36,6 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
     if ((startIndex >= 0) && (endIndex >= 0)) {
       switch ((endIndex - startIndex).abs()) {
         case 0:
-          print("Animation not needed");
           break;
         case 1:
           _controllerShort.isActive = true;
@@ -48,7 +48,7 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
           break;
       }
     } else {
-      print("Invalid index input");
+      return;
     }
   }
 
@@ -93,8 +93,7 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
             ),
             Obx(
               () => Positioned(
-                left: buttonPressed.value == 0 ? -9.8 : null,
-                right: buttonPressed.value == 3 ? -9.8 : null,
+                left: -9.8,
                 bottom: 0,
                 height: 100,
                 width: 472,
@@ -104,77 +103,70 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Expanded(
-                        flex: adjustleftContainer(),
-                        child: SizedBox(
-                          height: 80,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 800),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.easeInOut,
+                        width: adjustleftContainer(),
+                        height: 80,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              color: const Color(0xFF3F4C73),
+                            ),
+                            Positioned(
+                              right: -1,
+                              child: Container(
+                                height: 80,
+                                width: 2,
                                 color: const Color(0xFF3F4C73),
                               ),
-                              Positioned(
-                                right: -1,
-                                child: Container(
-                                  height: 80,
-                                  width: 2,
-                                  color: const Color(0xFF3F4C73),
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 100,
                         width: 140,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (_isPlaying) {
-                              return;
-                            } else {
-                              whichControllerPlaysNow(
-                                  startIndex: lastButtonPressed.value,
-                                  endIndex: buttonPressed.value);
-                              print(
-                                  "LB: ${lastButtonPressed.value}\nBP: ${buttonPressed.value}");
-                              lastButtonPressed.value = buttonPressed.value;
-                            }
+                        child: Obx(
+                          () {
+                            lastButtonPressed.value;
+                            return BuildAnimation(
+                              controllerLong: _controllerLong,
+                              controllerMedium: _controllerMedium,
+                              controllerShort: _controllerShort,
+                              function: () {
+                                if (!_isPlaying) {
+                                  whichControllerPlaysNow(
+                                      startIndex: lastButtonPressed.value,
+                                      endIndex: buttonPressed.value);
+                                  lastButtonPressed.value = buttonPressed.value;
+                                }
+                              },
+                            );
                           },
-                          child: RiveAnimation.asset(
-                            "assets/animations/gap_animation.riv",
-                            fit: BoxFit.contain,
-                            controllers: [
-                              _controllerShort,
-                              _controllerMedium,
-                              _controllerLong
-                            ],
-                          ),
                         ),
                       ),
-                      Expanded(
-                        flex: adjustRightContainer(),
-                        child: SizedBox(
-                          height: 80,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 800),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.easeInOut,
+                        width: adjustRightContainer(),
+                        height: 80,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              color: const Color(0xFF3F4C73),
+                            ),
+                            Positioned(
+                              left: -1,
+                              child: Container(
+                                height: 80,
+                                width: 2,
                                 color: const Color(0xFF3F4C73),
                               ),
-                              Positioned(
-                                left: -1,
-                                child: Container(
-                                  height: 80,
-                                  width: 2,
-                                  color: const Color(0xFF3F4C73),
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ),
                     ],
@@ -200,34 +192,62 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
     );
   }
 
-  int adjustleftContainer() {
+  double? adjustleftContainer() {
     switch (buttonPressed.value) {
       case 0:
         return 0;
       case 1:
-        return 7;
+        return 90;
       case 2:
-        return 17;
+        return 180;
       case 3:
-        return 1;
-      default:
-        return 0;
+        return 270;
     }
+    return null;
   }
 
-  int adjustRightContainer() {
+  double? adjustRightContainer() {
     switch (buttonPressed.value) {
       case 0:
-        return 1;
+        return 270;
       case 1:
-        return 22;
+        return 180;
       case 2:
-        return 16;
+        return 90;
       case 3:
         return 0;
-      default:
-        return 0;
     }
+    return null;
+  }
+}
+
+class BuildAnimation extends StatelessWidget {
+  const BuildAnimation({
+    Key? key,
+    required this.function,
+    required this.controllerShort,
+    required this.controllerMedium,
+    required this.controllerLong,
+  }) : super(key: key);
+  final RiveAnimationController controllerShort;
+  final RiveAnimationController controllerMedium;
+  final RiveAnimationController controllerLong;
+
+  final Function() function;
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        function();
+      },
+    );
+
+    return RiveAnimation.asset(
+      "assets/animations/fast_gap_animation.riv",
+      fit: BoxFit.contain,
+      controllers: [controllerShort, controllerMedium, controllerLong],
+    );
   }
 }
 
@@ -278,7 +298,6 @@ class _ClickeableAreaState extends State<ClickeableArea> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Button index: ${widget.index}");
         buttonPressed.value = widget.index;
         setState(() {});
       },
