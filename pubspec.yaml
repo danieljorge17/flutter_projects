@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/toggle_theme_switcher/
     - assets/animations/
+    - assets/bottom_bar_fancy/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

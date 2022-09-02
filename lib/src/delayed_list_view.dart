@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/bloc.dart';
+import 'package:flutter_projects/src/bloc.dart';
 import 'package:get/get.dart';
 
 // class DelayedListView extends StatefulWidget {
