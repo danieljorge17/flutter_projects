@@ -182,12 +182,20 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
                 ((index) => ClickeableArea(index: index)),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: List.generate(
+                4,
+                ((index) => AnimatedText(index: index)),
+              ),
+            ),
           ],
         ),
         Container(
           height: 24,
-          color: Colors.black12,
-        )
+          color: const Color(0xFF3F4C73),
+        ),
       ],
     );
   }
@@ -195,13 +203,13 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
   double? adjustleftContainer() {
     switch (buttonPressed.value) {
       case 0:
-        return 0;
+        return 5;
       case 1:
-        return 90;
+        return 100;
       case 2:
-        return 180;
+        return 195;
       case 3:
-        return 270;
+        return 290;
     }
     return null;
   }
@@ -209,16 +217,44 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
   double? adjustRightContainer() {
     switch (buttonPressed.value) {
       case 0:
-        return 270;
+        return 290;
       case 1:
-        return 180;
+        return 195;
       case 2:
-        return 90;
+        return 100;
       case 3:
-        return 0;
+        return 5;
     }
     return null;
   }
+
+  // double? adjustleftContainer() {
+  //   switch (buttonPressed.value) {
+  //     case 0:
+  //       return 0;
+  //     case 1:
+  //       return 90;
+  //     case 2:
+  //       return 180;
+  //     case 3:
+  //       return 270;
+  //   }
+  //   return null;
+  // }
+
+  // double? adjustRightContainer() {
+  //   switch (buttonPressed.value) {
+  //     case 0:
+  //       return 270;
+  //     case 1:
+  //       return 180;
+  //     case 2:
+  //       return 90;
+  //     case 3:
+  //       return 0;
+  //   }
+  //   return null;
+  // }
 }
 
 class BuildAnimation extends StatelessWidget {
@@ -265,7 +301,7 @@ class _ButtonAnimatedState extends State<ButtonAnimated> {
     return Obx(
       () => AnimatedContainer(
         duration: const Duration(milliseconds: 600),
-        curve: Curves.decelerate,
+        curve: Curves.easeInQuad,
         alignment: buttonPressed.value == widget.index
             ? Alignment.topCenter
             : Alignment.bottomCenter,
@@ -274,7 +310,7 @@ class _ButtonAnimatedState extends State<ButtonAnimated> {
         color: Colors.transparent,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 600),
-          curve: Curves.decelerate,
+          curve: Curves.easeInQuad,
           height: buttonPressed.value == widget.index ? 60 : 30,
           width: buttonPressed.value == widget.index ? 60 : 30,
           decoration: const BoxDecoration(
@@ -310,6 +346,42 @@ class _ClickeableAreaState extends State<ClickeableArea> {
           width: 60,
           color: Colors.transparent,
         ),
+      ),
+    );
+  }
+}
+
+class BottomBarLabels {
+  static List<String> labels = ["Home", "Goals", "Garden", "Profile"];
+}
+
+class AnimatedText extends StatelessWidget {
+  const AnimatedText({Key? key, required this.index}) : super(key: key);
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      width: 60,
+      alignment: Alignment.bottomCenter,
+      child: Obx(
+        () {
+          return AnimatedOpacity(
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeInExpo,
+            opacity: buttonPressed.value == index ? 1.0 : 0.0,
+            child: Text(
+              BottomBarLabels.labels[index].toUpperCase(),
+              style: TextStyle(
+                  fontSize: 12,
+                  color: buttonPressed.value == index
+                      ? Colors.white
+                      : Colors.transparent),
+            ),
+          );
+        },
       ),
     );
   }
