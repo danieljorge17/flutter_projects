@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/state_manager.dart';
 import 'package:rive/rive.dart';
 
@@ -172,6 +173,14 @@ class _BottomBarFancyState extends State<BottomBarFancy> {
                     ],
                   ),
                 ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                4,
+                ((index) => AnimatedIcon(index: index)),
               ),
             ),
             Row(
@@ -376,12 +385,63 @@ class AnimatedText extends StatelessWidget {
               BottomBarLabels.labels[index].toUpperCase(),
               style: TextStyle(
                   fontSize: 12,
+                  fontFamily: "Baloo Chettan 2",
                   color: buttonPressed.value == index
                       ? Colors.white
                       : Colors.transparent),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+List<String> buttonsFirstIconLabel = ["home", "goal", "garden", "profile"];
+
+class AnimatedIcon extends StatelessWidget {
+  const AnimatedIcon({Key? key, required this.index}) : super(key: key);
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => AnimatedContainer(
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInQuad,
+        alignment: buttonPressed.value == index
+            ? Alignment.topCenter
+            : Alignment.bottomCenter,
+        height: 90,
+        width: 60,
+        color: Colors.transparent,
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedOpacity(
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeInOutExpo,
+                opacity: buttonPressed.value == index ? 0.0 : 1.0,
+                child: SvgPicture.asset(
+                    "assets/bottom_bar_fancy/${buttonsFirstIconLabel[index]}_line.svg"),
+              ),
+              AnimatedOpacity(
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeInOutExpo,
+                opacity: buttonPressed.value == index ? 1.0 : 0.0,
+                child: SvgPicture.asset(
+                    "assets/bottom_bar_fancy/${buttonsFirstIconLabel[index]}_colorful.svg"),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

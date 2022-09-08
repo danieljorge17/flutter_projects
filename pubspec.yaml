@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/animations/
     - assets/bottom_bar_fancy/
+    - assets/bottom_bar_fancy/fonts/
     - assets/discord/
     - assets/discord/icons/
     - assets/discord/sidebar/
@@ -88,6 +89,10 @@ flutter:
         - asset: assets/fonts/europa_regular.ttf
         - asset: assets/fonts/europa_bold.ttf
           weight: 700
+          
+    - family: Baloo Chettan 2
+      fonts:
+        - asset: assets/bottom_bar_fancy/fonts/BalooChettan2-VariableFont_wght.ttf
         
   #   - family: Schyler
   #     fonts:
