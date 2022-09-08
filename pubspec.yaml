@@ -63,9 +63,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/toggle_theme_switcher/
     - assets/animations/
     - assets/bottom_bar_fancy/
+    - assets/discord/
+    - assets/discord/icons/
+    - assets/discord/sidebar/
+    - assets/toggle_theme_switcher/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -79,7 +82,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Europa
+      fonts:
+        - asset: assets/fonts/europa_regular.ttf
+        - asset: assets/fonts/europa_bold.ttf
+          weight: 700
+        
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

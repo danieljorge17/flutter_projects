@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="96" viewBox="0 0 19 96">
+  <g id="Drag_Tab" data-name="Drag Tab" transform="translate(0 96) rotate(-90)">
+    <path id="Caminho_401" data-name="Caminho 401" d="M0,0H52V19H0Z" transform="translate(22)" fill="#4a4d64" opacity="0.5"/>
+    <g id="Grupo_5" data-name="Grupo 5" transform="translate(32 6)">
+      <g id="Retângulo_19" data-name="Retângulo 19" fill="none" stroke="#9497af" stroke-width="1">
+        <rect width="32" height="1" rx="0.5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" fill="none"/>
+      </g>
+      <g id="Retângulo_20" data-name="Retângulo 20" transform="translate(0 6)" fill="none" stroke="#9497af" stroke-width="1">
+        <rect width="32" height="1" rx="0.5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" fill="none"/>
+      </g>
+      <g id="Retângulo_22" data-name="Retângulo 22" transform="translate(0 3)" fill="none" stroke="#9497af" stroke-width="1">
+        <rect width="32" height="1" rx="0.5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" fill="none"/>
+      </g>
+    </g>
+    <path id="Caminho_13" data-name="Caminho 13" d="M0,22a9.491,9.491,0,0,1,4.7-8.207l9.6-5.585A9.491,9.491,0,0,0,19,0V22Z" transform="translate(96) rotate(90)" fill="#4a4d64" opacity="0.5"/>
+    <path id="Caminho_14" data-name="Caminho 14" d="M0,0A9.491,9.491,0,0,0,4.7,8.207l9.6,5.585A9.491,9.491,0,0,1,19,22V0Z" transform="translate(22) rotate(90)" fill="#4a4d64" opacity="0.5"/>
+  </g>
+</svg>

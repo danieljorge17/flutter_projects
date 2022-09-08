@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="add_channel_icon" transform="translate(-24 -272)">
+    <circle id="Background_-_Add_Channel" data-name="Background - Add Channel" cx="20" cy="20" r="20" transform="translate(24 272)" fill="#21004e" opacity="0.25"/>
+    <line id="Linha_1" data-name="Linha 1" y2="16" transform="translate(44 284)" fill="none" stroke="#b875fc" stroke-linecap="round" stroke-width="2.5"/>
+    <line id="Linha_2" data-name="Linha 2" x2="16" transform="translate(36 292)" fill="none" stroke="#b875fc" stroke-linecap="round" stroke-width="2.5"/>
+  </g>
+</svg>

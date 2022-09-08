@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c16dfc"/>
+      <stop offset="1" stop-color="#b279fc"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#4d72de"/>
+      <stop offset="1" stop-color="#a44cee"/>
+    </linearGradient>
+  </defs>
+  <g id="explore_icon" transform="translate(-24 -184)">
+    <circle id="Background_-_Explore" data-name="Background - Explore" cx="20" cy="20" r="20" transform="translate(24 184)" fill="#21004e" opacity="0.25"/>
+    <path id="explore_icon-2" data-name="explore_icon" d="M24.286,12.143A12.143,12.143,0,1,1,12.143,0,12.143,12.143,0,0,1,24.286,12.143ZM16.85,6.009a1.1,1.1,0,0,1,1.427,1.427l-2.659,6.913a2.207,2.207,0,0,1-1.268,1.268L7.436,18.276A1.1,1.1,0,0,1,6.009,16.85L8.668,9.936A2.208,2.208,0,0,1,9.936,8.668Zm-4.707,8.341a2.208,2.208,0,1,0-2.208-2.208A2.208,2.208,0,0,0,12.143,14.351Z" transform="translate(31.857 191.857)" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+    <path id="Border" d="M20,1a19.005,19.005,0,0,0-7.4,36.507A19.005,19.005,0,0,0,27.4,2.493,18.88,18.88,0,0,0,20,1m0-1A20,20,0,1,1,0,20,20,20,0,0,1,20,0Z" transform="translate(24 184)" fill="url(#linear-gradient-2)"/>
+  </g>
+</svg>
