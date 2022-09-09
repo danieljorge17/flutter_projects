@@ -84,13 +84,13 @@ class _SideBarInnerBarState extends State<SideBarInnerBar> {
                     bottomRight: Radius.circular(24),
                   ),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+                    filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
                     child: Container(
                       padding: EdgeInsets.only(
                         top: responsive(height: 24),
                         left: responsive(width: 120),
                       ),
-                      color: const Color(0xFF262A3F).withOpacity(0.75),
+                      color: const Color(0xFF363A50).withOpacity(0.50),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -620,6 +620,7 @@ class Bottombar extends StatefulWidget {
 
 class _BottombarState extends State<Bottombar> {
   int lastButtonPressedIndex = -1;
+  bool isAudioVideoTabOpen = false;
 
   void buttonPressedIndex({int? index}) {
     if (index == lastButtonPressedIndex) {
@@ -640,30 +641,39 @@ class _BottombarState extends State<Bottombar> {
       child: Row(
         children: [
           Gap(responsive(width: 24)),
-          Stack(
+          Container(
             clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                top: responsive(height: -10),
-                left: responsive(width: -12),
-                child: Image.asset(
-                  "assets/discord/sidebar/blury_selected_channel.png",
-                  width: responsive(width: 64),
+            width: responsive(width: 40),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  left: responsive(width: -16),
+                  bottom: responsive(height: -16),
+                  child: const AudioVideoTab(),
                 ),
-              ),
-              Positioned(
-                top: 0.5,
-                right: 0.5,
-                child: Image.asset(
-                  "assets/discord/avatar_picture_one.png",
-                  width: responsive(width: 39),
+                Positioned(
+                  top: responsive(height: -10),
+                  left: responsive(width: -12),
+                  child: Image.asset(
+                    "assets/discord/sidebar/blury_selected_channel.png",
+                    width: responsive(width: 64),
+                  ),
                 ),
-              ),
-              SvgPicture.asset(
-                "assets/discord/avatar_border_small.svg",
-                width: responsive(width: 40),
-              ),
-            ],
+                Positioned(
+                  top: 0.5,
+                  right: 0.5,
+                  child: Image.asset(
+                    "assets/discord/avatar_picture_one.png",
+                    width: responsive(width: 39),
+                  ),
+                ),
+                SvgPicture.asset(
+                  "assets/discord/avatar_border_small.svg",
+                  width: responsive(width: 40),
+                ),
+              ],
+            ),
           ),
           Gap(responsive(width: 24)),
           Container(
@@ -677,7 +687,9 @@ class _BottombarState extends State<Bottombar> {
               buttonPressedIndex(index: 0);
               setState(() {});
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.decelerate,
               height: responsive(height: 48),
               width: responsive(width: 48),
               alignment: Alignment.center,
@@ -685,7 +697,7 @@ class _BottombarState extends State<Bottombar> {
                 shape: BoxShape.circle,
                 color: lastButtonPressedIndex == 0
                     ? const Color(0xFF40445B)
-                    : Colors.transparent,
+                    : const Color(0x0040445B),
               ),
               child: SvgPicture.asset(
                 "assets/discord/icons/profile.svg",
@@ -699,7 +711,9 @@ class _BottombarState extends State<Bottombar> {
               buttonPressedIndex(index: 1);
               setState(() {});
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.decelerate,
               height: responsive(height: 48),
               width: responsive(width: 48),
               alignment: Alignment.center,
@@ -707,7 +721,7 @@ class _BottombarState extends State<Bottombar> {
                 shape: BoxShape.circle,
                 color: lastButtonPressedIndex == 1
                     ? const Color(0xFF40445B)
-                    : Colors.transparent,
+                    : const Color(0x0040445B),
               ),
               child: SvgPicture.asset(
                 "assets/discord/icons/notification.svg",
@@ -721,7 +735,9 @@ class _BottombarState extends State<Bottombar> {
               buttonPressedIndex(index: 2);
               setState(() {});
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.decelerate,
               height: responsive(height: 48),
               width: responsive(width: 48),
               alignment: Alignment.center,
@@ -729,7 +745,7 @@ class _BottombarState extends State<Bottombar> {
                 shape: BoxShape.circle,
                 color: lastButtonPressedIndex == 2
                     ? const Color(0xFF40445B)
-                    : Colors.transparent,
+                    : const Color(0x0040445B),
               ),
               child: SvgPicture.asset(
                 "assets/discord/icons/message.svg",
@@ -743,7 +759,9 @@ class _BottombarState extends State<Bottombar> {
               buttonPressedIndex(index: 3);
               setState(() {});
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.decelerate,
               height: responsive(height: 48),
               width: responsive(width: 48),
               alignment: Alignment.center,
@@ -751,7 +769,7 @@ class _BottombarState extends State<Bottombar> {
                 shape: BoxShape.circle,
                 color: lastButtonPressedIndex == 3
                     ? const Color(0xFF40445B)
-                    : Colors.transparent,
+                    : const Color(0x0040445B),
               ),
               child: SvgPicture.asset(
                 "assets/discord/icons/setting.svg",
@@ -760,6 +778,98 @@ class _BottombarState extends State<Bottombar> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AudioVideoTab extends StatefulWidget {
+  const AudioVideoTab({Key? key}) : super(key: key);
+
+  @override
+  State<AudioVideoTab> createState() => _AudioVideoTabState();
+}
+
+class _AudioVideoTabState extends State<AudioVideoTab> {
+  bool _isCameraOn = false;
+  bool _isHeadphoneOn = false;
+  bool _isMicrophoneOn = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(36),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+        child: Container(
+          height: responsive(height: 254),
+          width: responsive(width: 72),
+          padding: EdgeInsets.only(top: responsive(height: 14)),
+          color: const Color(0x88363A50),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () => _isCameraOn = !_isCameraOn,
+                child: Container(
+                  height: responsive(height: 40),
+                  width: responsive(width: 40),
+                  alignment: Alignment.center,
+                  color: Colors.transparent,
+                  child: SvgPicture.asset(
+                    "assets/discord/icons/camera_off.svg",
+                    height: responsive(height: 20),
+                  ),
+                ),
+              ),
+              Gap(responsive(height: 10)),
+              Container(
+                height: responsive(height: 1),
+                width: responsive(width: 48),
+                alignment: Alignment.center,
+                color: const Color(0xFF4A4D64),
+              ),
+              Gap(responsive(height: 10)),
+              GestureDetector(
+                onTap: () => _isHeadphoneOn = !_isHeadphoneOn,
+                child: Container(
+                  height: responsive(height: 40),
+                  width: responsive(width: 40),
+                  alignment: Alignment.center,
+                  color: Colors.transparent,
+                  child: SvgPicture.asset(
+                    "assets/discord/icons/headphone_off.svg",
+                    height: responsive(height: 20),
+                  ),
+                ),
+              ),
+              Gap(responsive(height: 10)),
+              Container(
+                height: responsive(height: 1),
+                width: responsive(width: 48),
+                alignment: Alignment.center,
+                color: const Color(0xFF4A4D64),
+              ),
+              Gap(responsive(height: 10)),
+              InkWell(
+                onTap: () {
+                  _isMicrophoneOn = !_isMicrophoneOn;
+                  setState(() {});
+                  debugPrint("Tapped");
+                },
+                child: Container(
+                  height: responsive(height: 40),
+                  width: responsive(width: 40),
+                  alignment: Alignment.center,
+                  color: Colors.red,
+                  child: SvgPicture.asset(
+                    "assets/discord/icons/microphone_${_isMicrophoneOn ? "on" : "off"}.svg",
+                    height: responsive(height: 20),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
